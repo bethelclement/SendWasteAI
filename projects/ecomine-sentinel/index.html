@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#06130f" />
+  <meta name="description" content="EcoMine Sentinel - explainable ecological digital twin for mine-water, biodiversity and restoration monitoring. Forum demo uses simulated data." />
+  <title>EcoMine Sentinel | Team 91 · Track 4</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="?view=overview" aria-label="EcoMine Sentinel home">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M8 48L23 17l9 18 9-14 15 27H8z" fill="currentColor"/><path d="M10 50h44" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="45" cy="17" r="6" fill="#7ef0b5"/></svg>
+        </div>
+        <div><strong>EcoMine Sentinel</strong><span>Ecological Digital Twin</span></div>
+      </a>
+
+      <div class="track-chip">TEAM 91 · TRACK 4</div>
+      <nav class="nav" aria-label="Primary navigation">
+        <button class="nav-item active" data-view="overview"><span>01</span><b>Overview</b></button>
+        <button class="nav-item" data-view="stations"><span>02</span><b>Sensor Network</b></button>
+        <button class="nav-item" data-view="evidence"><span>03</span><b>Evidence Fusion</b></button>
+        <button class="nav-item" data-view="restoration"><span>04</span><b>Restoration</b></button>
+        <button class="nav-item" data-view="validation"><span>05</span><b>Validation</b></button>
+        <button class="nav-item" data-view="scale"><span>06</span><b>Scale & Partnership</b></button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="status-row"><span class="dot pulse"></span><span>Offline-first · demo ready</span></div>
+        <small>Accepted concept preserved<br/>Nigeria ↔ Russia calibration</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Russian-African Forum-Contest of Young Scientists · Climate, Ecological & Biodiversity Engineering</p>
+          <h1 id="view-title">Landscape Risk Overview</h1>
+        </div>
+        <div class="top-actions">
+          <div class="country-toggle" role="group" aria-label="Calibration region">
+            <button class="toggle-btn active" data-region="Nigeria">Nigeria</button>
+            <button class="toggle-btn" data-region="Russia">Russia</button>
+          </div>
+          <button class="outline-btn" id="panel-mode">▶ Panel mode</button>
+          <button id="menu-btn" class="icon-btn" aria-label="Toggle menu">☰</button>
+        </div>
+      </header>
+
+      <section class="notice">
+        <div><strong>Scientific demo:</strong> measurements and performance values are simulated to demonstrate the accepted workflow. They are not claimed field results.</div>
+        <button id="export-demo" class="text-btn">Export demo snapshot ↗</button>
+      </section>
+
+      <section id="overview" class="view active">
+        <div class="hero-grid">
+          <article class="risk-card panel">
+            <div class="risk-head">
+              <div>
+                <span class="label">Fused ecological risk</span>
+                <div class="risk-score-row"><span id="risk-score">67</span><small>/100</small></div>
+                <span id="risk-label" class="risk-badge high">HIGH</span>
+              </div>
+              <div class="ring-wrap">
+                <svg class="ring" viewBox="0 0 120 120" aria-label="Risk score"><circle class="ring-bg" cx="60" cy="60" r="48"></circle><circle id="ring-value" class="ring-value" cx="60" cy="60" r="48"></circle></svg>
+                <div class="ring-center"><span id="online-count">5/6</span><small>nodes online</small></div>
+              </div>
+            </div>
+            <div class="risk-message" id="risk-message">Mine-water deterioration and habitat stress are the dominant signals. Immediate verification recommended.</div>
+            <div class="mini-meta"><span>Updated <b id="updated-time">just now</b></span><span>Confidence <b id="confidence">86%</b></span><span>Alert SLA <b>&lt;24 h</b></span></div>
+          </article>
+
+          <article class="panel quick-actions">
+            <div class="panel-title-row"><div><span class="label">Scenario simulator</span><h2>Trigger a field condition</h2></div><span class="demo-chip">LIVE DEMO</span></div>
+            <p>One click shows the panel how five independent evidence streams change one explainable risk score.</p>
+            <div class="scenario-buttons">
+              <button data-scenario="normal" class="scenario">Baseline</button>
+              <button data-scenario="water" class="scenario">Mine-water event</button>
+              <button data-scenario="habitat" class="scenario active">Restoration stress</button>
+              <button data-scenario="recovery" class="scenario">Recovery</button>
+            </div>
+            <button id="explain-btn" class="primary-btn">Explain this alert</button>
+          </article>
+        </div>
+
+        <div class="metrics-grid">
+          <article class="metric panel"><span class="metric-icon">≈</span><div><span>Data uptime</span><strong id="uptime">91%</strong><small>POC target ≥85%</small></div></article>
+          <article class="metric panel"><span class="metric-icon">✓</span><div><span>Expert agreement</span><strong id="agreement">83%</strong><small>POC target ≥80%</small></div></article>
+          <article class="metric panel"><span class="metric-icon">↗</span><div><span>Fusion gain</span><strong id="fusion-gain">+18%</strong><small>POC target ≥15%</small></div></article>
+          <article class="metric panel"><span class="metric-icon">↓</span><div><span>Cost / cycle</span><strong id="cost-reduction">−24%</strong><small>POC target ≥20%</small></div></article>
+        </div>
+
+        <div class="content-grid">
+          <article class="panel evidence-card">
+            <div class="panel-title-row"><div><span class="label">Explainable index</span><h2>What is driving the risk?</h2></div><span class="subtle">starting weights v0.1</span></div>
+            <div id="evidence-bars" class="evidence-bars"></div>
+          </article>
+          <article class="panel alerts-card">
+            <div class="panel-title-row"><div><span class="label">Verified alert queue</span><h2>Priority actions</h2></div><span id="alert-count" class="count-pill">3</span></div>
+            <div id="alerts-list" class="alerts-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="stations" class="view">
+        <div class="section-intro panel">
+          <div><span class="label">Accepted six-node pilot architecture</span><h2>2 Impact · 2 Buffer · 2 Reference</h2></div>
+          <p>Solar-powered, low-bandwidth nodes simulate 15-minute mine-water and microclimate readings with local storage, LoRa/2G sync and field calibration.</p>
+        </div>
+        <div id="station-grid" class="station-grid"></div>
+        <div class="architecture-strip panel">
+          <div><span>Field sensing</span><b>pH · EC · turbidity · temperature · humidity · PM · noise</b></div><i>→</i><div><span>Resilient edge</span><b>Solar + LiFePO4 · local cache · LoRa/2G</b></div><i>→</i><div><span>Validation</span><b>Monthly grab samples · quarterly metals · calibration log</b></div>
+        </div>
+      </section>
+
+      <section id="evidence" class="view">
+        <div class="evidence-layout">
+          <article class="panel">
+            <div class="panel-title-row"><div><span class="label">Five-source fusion</span><h2>One score, every source visible</h2></div><span class="demo-chip">EXPLAINABLE</span></div>
+            <div id="fusion-diagram" class="fusion-diagram"></div>
+          </article>
+          <article class="panel">
+            <span class="label">Audit trail</span><h2>Why the system raised this alert</h2>
+            <div id="audit-trail" class="audit-trail"></div>
+          </article>
+        </div>
+        <article class="panel credibility-panel">
+          <div><span class="label">Evidence classes</span><h2>Sensor ≠ satellite ≠ biodiversity ≠ community report</h2></div>
+          <p>EcoMine Sentinel does not treat every signal as equivalent. Community observations are geotagged and accepted into the risk engine only after corroboration; sensor and satellite anomalies are checked against rainfall, season and reference zones before escalation.</p>
+        </article>
+      </section>
+
+      <section id="restoration" class="view">
+        <div class="restoration-layout">
+          <article class="panel map-panel">
+            <div class="panel-title-row"><div><span class="label">Digital twin map</span><h2>Where should the field team go first?</h2></div><span class="subtle">schematic demo</span></div>
+            <svg class="site-map" viewBox="0 0 900 500" role="img" aria-label="Schematic mine landscape risk map">
+              <defs><linearGradient id="terrain" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0c221a"/><stop offset="1" stop-color="#102c22"/></linearGradient></defs>
+              <rect x="0" y="0" width="900" height="500" rx="20" fill="url(#terrain)"/>
+              <path d="M0 356C138 293 209 391 330 318S563 288 900 334" fill="none" stroke="#2e6f89" stroke-width="18" opacity=".75"/>
+              <path d="M0 356C138 293 209 391 330 318S563 288 900 334" fill="none" stroke="#70c4df" stroke-width="2" opacity=".8"/>
+              <path d="M59 86L288 74 337 224 168 256 69 185Z" fill="#36261c" stroke="#644735" stroke-width="2"/><text x="126" y="166" class="map-label">Mining / disturbed zone</text>
+              <path d="M530 64l276 22-29 142-223 4z" fill="#153428" stroke="#26533f"/><text x="615" y="153" class="map-label">Restoration plots</text>
+              <g id="map-zones"></g><g id="map-nodes"></g>
+            </svg>
+          </article>
+          <article class="panel priority-panel">
+            <span class="label">Restoration triage</span><h2>Rank action, not just risk</h2>
+            <div id="priority-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="validation" class="view">
+        <div class="validation-grid">
+          <article class="panel">
+            <div class="panel-title-row"><div><span class="label">Testable hypothesis</span><h2>Fusion must beat the strongest single source</h2></div><span class="demo-chip">SCIENTIFIC TEST</span></div>
+            <p class="muted">The 12-month pilot compares the fused model with every single-source baseline using balanced accuracy and F1 score against expert classifications.</p>
+            <div id="comparison-chart" class="comparison-chart"></div>
+          </article>
+          <article class="panel">
+            <span class="label">Pre-registered POC targets</span><h2>What success means</h2>
+            <div class="target-list">
+              <div><b>≥85%</b><span>data uptime</span></div><div><b>≥80%</b><span>agreement with expert classifications</span></div><div><b>≥15%</b><span>accuracy improvement over strongest single-source method</span></div><div><b>≥20%</b><span>lower monitoring cost per cycle</span></div>
+            </div>
+            <div class="budget-box"><span>Accepted proof-of-concept budget</span><strong>US$18,000</strong><small>Six stations · gateway/dashboard · laboratory validation · deployment · training · spares</small></div>
+          </article>
+        </div>
+        <article class="panel methods-line">
+          <div><span>01</span><b>Calibrate</b><small>against field and laboratory measurements</small></div><i>→</i><div><span>02</span><b>Classify</b><small>monthly expert low/moderate/high/critical risk</small></div><i>→</i><div><span>03</span><b>Compare</b><small>fusion vs single-source baselines</small></div><i>→</i><div><span>04</span><b>Recalibrate</b><small>weights and thresholds transparently</small></div>
+        </article>
+      </section>
+
+      <section id="scale" class="view">
+        <div class="scale-hero panel">
+          <div>
+            <span class="label">Fundable pathway</span>
+            <h2>Validate once. Localise twice. Scale with evidence.</h2>
+            <p>The accepted Plateau State POC remains Phase 1. Kuje/FCT is a proposed Phase-2 demonstration corridor after site/cadastre confirmation; Russian co-validation tests cold-climate hardware and compressed biological seasons.</p>
+          </div>
+          <div class="ask-card"><span>Immediate partnership ask</span><strong>Fund + host the US$18k POC</strong><small>and nominate laboratory / mine-site counterparts for validation.</small></div>
+        </div>
+
+        <div class="scale-grid">
+          <article class="panel stage-card active-stage"><span>0–6 months</span><h3>Plateau State · Nigeria</h3><p>Deploy six nodes across impact, buffer and reference zones. Validate mine-water, satellite and biodiversity alerts against expert and laboratory evidence.</p><ul><li>Accepted pilot geography</li><li>Tropical heat, dust, rainfall</li><li>Offline-first field operations</li></ul></article>
+          <article class="panel stage-card"><span>6–12 months</span><h3>Kuje / FCT · proposed extension</h3><p>Test transferability near Abuja, starting with documented sand/quarry-impacted landscapes and any licensed solid-mineral sites confirmed through cadastre/NGSA scoping.</p><ul><li>Closer to regulators and universities</li><li>FCT mineral diversity provides future use cases</li><li>Separate extension budget after scoping</li></ul></article>
+          <article class="panel stage-card"><span>12–24 months</span><h3>Russia · co-validation</h3><p>Retain the same data architecture while adapting batteries, enclosures, thresholds and biological baselines to cold climates and snow/seasonality.</p><ul><li>Cold-resistant hardware</li><li>Shared protocols + joint publication</li><li>Nedra / Mining University partner pathway</li></ul></article>
+        </div>
+
+        <div class="partner-grid">
+          <article class="panel"><span class="label">Why Track 4</span><h3>Water + ecosystems + lower footprint</h3><p>Mine-water warning is the first decision layer; biodiversity and restoration evidence show whether engineering interventions are actually improving the landscape.</p></article>
+          <article class="panel"><span class="label">Why funders / operators</span><h3>Measurable evidence, not ESG theatre</h3><p>Each alert keeps its source evidence, every threshold is locally calibrated, and the pilot has explicit uptime, accuracy and cost targets.</p></article>
+          <article class="panel"><span class="label">Commercial path</span><h3>Monitoring-as-a-service</h3><p>Local assembly + installation + annual dashboard/reporting + calibration/lab services + technician training for regulators, operators and restoration contractors.</p></article>
+        </div>
+
+        <article class="panel source-card-wide">
+          <div><span class="label">Kuje/FCT evidence basis</span><h3>Expansion is proposed, not claimed as deployed</h3></div>
+          <p>NGSA's 2022 FCT mineral-resource map lists commodities including gold, granite, feldspar, kaolin, lead-zinc, cassiterite, tantalite, tin and sand across the FCT. A 2023 study in Chibiri, Kuje documented land alteration, ecosystem disturbance, erosion and vegetation loss associated with sand mining. These justify a scoping extension after the accepted Plateau pilot - not a change to the submitted study.</p>
+        </article>
+      </section>
+
+      <footer>
+        <span>EcoMine Sentinel · Team 91 · Track 4 · Bethel Chinedu Clement · Kitgak Simon · Chinazaekpere Emmanuel Ofodile</span>
+        <span>Prototype · simulated demo data · accepted concept preserved</span>
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="explain-dialog"><button class="dialog-close" aria-label="Close">×</button><span class="label">Explainable alert</span><h2 id="dialog-title">Why this risk score?</h2><div id="dialog-body"></div></dialog>
+  <dialog id="panel-dialog"><button class="dialog-close" aria-label="Close">×</button><span class="label">3-minute panel walkthrough</span><h2>Tell the story in six clicks</h2><div class="walkthrough" id="walkthrough"></div></dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
